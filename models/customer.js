@@ -12,7 +12,16 @@ class Customer {
     this.lastName = lastName;
     // this.fullName = `${this.firstName} ${this.lastName}`;
     this.phone = phone;
-    this.notes = notes;
+    // this.notes = notes;
+    this._notes = notes || "";
+  }
+
+  get notes() {
+    return this._notes;
+  }
+  
+  set notes(value) {
+    this._notes = value || "";
   }
 
   /** find all customers. */
@@ -119,9 +128,14 @@ class Customer {
     }
   }
 
-  getFullName() {
+  // getFullName() {
+  //   return `${this.firstName} ${this.lastName}`;
+  // }
+
+  get fullName() {
     return `${this.firstName} ${this.lastName}`;
   }
+  
 
 
 

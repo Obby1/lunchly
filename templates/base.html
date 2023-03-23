@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
+  <!-- Note: Started implementing pop up calender to front end of code, but stopped due to time
+  constraints. Left pending code in here in case I decide to build out this application later -->
+  <!-- <script>
+    function formatDateTimeLocal(datetime) {
+      const dt = new Date(datetime);
+      const year = dt.getFullYear();
+      const month = (dt.getMonth() + 1).toString().padStart(2, '0');
+      const day = dt.getDate().toString().padStart(2, '0');
+      const hour = dt.getHours();
+      const minute = dt.getMinutes().toString().padStart(2, '0');
+      const ampm = hour < 12 ? 'AM' : 'PM';
+      const hour12 = hour % 12 || 12;
+      const hour12Str = hour12.toString().padStart(2, '0');
+      return `${year}-${month}-${day}T${hour12Str}:${minute}${ampm}`;
+    }
+  </script>   -->
   <title>Lunch.ly {% block title %}{% endblock %}</title>
 </head>
 <body>

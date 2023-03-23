@@ -125,6 +125,11 @@ router.post("/:id/add-reservation/", async function(req, res, next) {
     const numGuests = req.body.numGuests;
     const notes = req.body.notes;
 
+     // Validate numGuests before saving the reservation
+    if (numGuests < 1) {
+      throw new Error("There must be at least 1 guest.");
+    }
+
     const reservation = new Reservation({
       customerId,
       startAt,
@@ -138,6 +143,48 @@ router.post("/:id/add-reservation/", async function(req, res, next) {
     return next(err);
   }
 });
+
+
+// Show form to edit a reservation
+router.get("/:customerId/reservations/:reservationId/edit/", async function (req, res, next) {
+  try {
+    const customer = await Customer.get(req.params.customerId);
+    const reservations = await customer.getReservations();
+    const reservation = reservations.find(r => r.id === parseInt(req.params.reservationId));
+
+    if (!reservation) {
+      throw new Error("Reservation not found.");
+    }
+
+    return res.render("reservation_edit_form.html", { customer, reservation });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+// Handle editing a reservation
+router.post("/:customerId/reservations/:reservationId/edit/", async function (req, res, next) {
+  try {
+    const customer = await Customer.get(req.params.customerId);
+    const reservations = await customer.getReservations();
+    const reservation = reservations.find(r => r.id === parseInt(req.params.reservationId));
+
+    if (!reservation) {
+      throw new Error("Reservation not found.");
+    }
+
+    reservation.startAt = new Date(req.body.startAt);
+    reservation.numGuests = req.body.numGuests;
+    reservation.notes = req.body.notes;
+
+    await reservation.save();
+
+    return res.redirect(`/${customer.id}/`);
+  } catch (err) {
+    return next(err);
+  }
+});
+
 
 
 

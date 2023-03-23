@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}{{ customer.getFullName() }}{% endblock %}
+{% block title %}{{ customer.fullName }}{% endblock %}
 
 {% block content %}
 
 
 
-<h1>{{ customer.getFullName() }}</h1>
+<h1>{{ customer.fullName }}</h1>
 
 <div class="row">
 
@@ -21,6 +21,7 @@
     <ul>
       {% for reservation in reservations %}
       <li><b>{{ reservation.getformattedStartAt() }}</b> for {{ reservation.numGuests }}</li>
+      <a href="/{{ customer.id }}/reservations/{{ reservation.id }}/edit/">Edit</a></td>
       {% endfor %}
     </ul>
     {% else %}
@@ -28,6 +29,8 @@
     {% endif %}
 
   </div>
+
+
 
   <div class="col-6">
     <h3>New Reservation</h3>
@@ -40,6 +43,20 @@
                placeholder="yyyy-mm-dd hh:mm am/pm"
         >
       </div>
+      
+      <!-- <div class="form-group">
+        <label for="start">Start</label>
+        <input id="start"
+               class="form-control"
+               name="startAtDisplay"
+               type="datetime-local"
+               placeholder="yyyy-mm-dd hh:mm AM/PM"
+               onchange="document.getElementById('startAt').value = formatDateTimeLocal(this.value);"
+        >
+        <input type="hidden" id="startAt" name="startAt">
+      </div> -->
+      
+
       <div class="form-group">
         <label for="num-guests"># of Guests:</label>
         <input class="form-control"
@@ -61,3 +78,6 @@
 </div>
 
 {% endblock %}
+
+  <!-- Note: Started implementing pop up calender to front end of code, but stopped due to time
+  constraints. Left pending code in here in case I decide to build out this application later -->

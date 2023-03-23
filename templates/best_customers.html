@@ -16,7 +16,7 @@
   <tbody>
     {% for customer in customers %}
     <tr>
-      <td><a href="/{{ customer.id }}/">{{ customer.getFullName() }}</a></td>
+      <td><a href="/{{ customer.id }}/">{{ customer.fullName }}</a></td>
       <td>{{ customer.phone }}</td>
       <td>{{ customer.notes }}</td>
       <td>{{ customer.totalReservations }}</td>
