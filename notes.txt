@@ -1,0 +1,1 @@
+nodemon -e js,html,css server.js for nodemon to listen for changes to js html and css files then restart

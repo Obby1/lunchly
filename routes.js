@@ -9,9 +9,25 @@ const router = new express.Router();
 
 /** Homepage: show list of customers. */
 
+// router.get("/", async function(req, res, next) {
+//   try {
+//     const customers = await Customer.all();
+//     return res.render("customer_list.html", { customers });
+//   } catch (err) {
+//     return next(err);
+//   }
+// });
+
+// modified search route below
+// ternary operator checks if searchQuery is truthy ("" is falsy by default) and returns matching data
+// if truthy, set customers to matching searchQuery and display on page
+// default is falsy which returns Customer.all()
 router.get("/", async function(req, res, next) {
   try {
-    const customers = await Customer.all();
+    const searchQuery = req.query.search || "";
+    const customers = searchQuery
+      ? await Customer.search(searchQuery)
+      : await Customer.all();
     return res.render("customer_list.html", { customers });
   } catch (err) {
     return next(err);
@@ -45,6 +61,17 @@ router.post("/add/", async function(req, res, next) {
     return next(err);
   }
 });
+
+// Best Customers Route placed above /:id route to ping this route first, avoid conflict
+router.get("/best-customers/", async function(req, res, next) {
+  try {
+    const customers = await Customer.topCustomers();
+    return res.render("best_customers.html", { customers });
+  } catch (err) {
+    return next(err);
+  }
+});
+
 
 /** Show a customer, given their ID. */
 
@@ -111,5 +138,7 @@ router.post("/:id/add-reservation/", async function(req, res, next) {
     return next(err);
   }
 });
+
+
 
 module.exports = router;

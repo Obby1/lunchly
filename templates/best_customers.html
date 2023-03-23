@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Best Customers{% endblock %}
+{% block content %}
+
+<h1>Best Customers</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Notes</th>
+      <th>Total Reservations</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for customer in customers %}
+    <tr>
+      <td><a href="/{{ customer.id }}/">{{ customer.getFullName() }}</a></td>
+      <td>{{ customer.phone }}</td>
+      <td>{{ customer.notes }}</td>
+      <td>{{ customer.totalReservations }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

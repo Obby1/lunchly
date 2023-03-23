@@ -6,13 +6,6 @@
 
 <h1>Customers</h1>
 
-<form action="/" method="GET" class="form-inline">
-  <div class="form-group">
-    <input type="text" name="search" value="{{searchQuery}}" class="form-control" placeholder="Search by name">
-  </div>
-  <button type="submit" class="btn btn-primary">Search</button>
-</form>
-
 <ul style="column-count: 4">
   {% for customer in customers %}
   <li><a href="/{{ customer.id }}/">{{ customer.getFullName() }}</a></li>
