@@ -1,1 +1,8 @@
 nodemon -e js,html,css server.js for nodemon to listen for changes to js html and css files then restart
+
+
+getters and setters are great for adding validation/ error handling to property values when they are assigned
+or updated. 
+
+Getters and setters are called implicitly when creating an instance of an object, accessing it's values,
+or modifying it through routes. 
