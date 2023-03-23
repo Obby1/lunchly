@@ -128,6 +128,7 @@ class Customer {
     }
   }
 
+  // first part of exercise here
   // getFullName() {
   //   return `${this.firstName} ${this.lastName}`;
   // }
